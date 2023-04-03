@@ -18,6 +18,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AppCommonModule } from 'src/app/app.common.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AxioHelper } from './core/helpers/axios-helper';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   exports: [TranslateModule],
   providers: [
     MessageService,
-    AuthGuard
+    AuthGuard,
+    AxioHelper
   ],
   bootstrap: [
     AppComponent

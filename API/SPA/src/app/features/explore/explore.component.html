@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-md-3 py-4 px-4 align-item-center" *ngFor="let cat of categoryList" 
+      (click)="onCategoryClick(cat.name)">
+    <img [src]="cat.imagePath" width="200" height="200">
+    <br>
+    <h4 class="py-2">{{cat.name}}</h4>
+  </div>
+</div>
