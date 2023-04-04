@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    //[ApiController]
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
@@ -14,11 +16,19 @@ namespace API.Controllers
         }
 
         [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser([FromForm]UserDto user)
+        public async Task<IActionResult> CreateUser([FromBody] UserDto user)
         {
             await _accountRepo.CreateUser(user);
 
             return Ok();
+        }
+
+        [HttpGet("Login")]
+        public async Task<IActionResult> Login(string userName, string password)
+        {
+            var response = await _accountRepo.Login(userName, password);
+
+            return Ok(response);
         }
 
         [HttpGet]

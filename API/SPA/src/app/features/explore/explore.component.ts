@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlacesService } from 'src/app/core/services/places.service';
+import { RouteStateService } from 'src/app/core/services/route-state.service';
 
 @Component({
   selector: 'app-explore',
@@ -9,7 +10,11 @@ import { PlacesService } from 'src/app/core/services/places.service';
 })
 export class ExploreComponent implements OnInit {
 
-  constructor(private _placeService: PlacesService, private router: Router) { }
+  constructor(
+    private _placeService: PlacesService, 
+    private router: Router,
+    private routeStateService: RouteStateService
+    ) { }
 
   ngOnInit() {
     this.getCategoryList();
@@ -25,7 +30,9 @@ export class ExploreComponent implements OnInit {
   }
 
   onCategoryClick(name: string){
-    this.router.navigate(['explore/category', name]);
+    this.router.navigate(['/main/explore', name]);
+    // this.routeStateService.add('PlaceByCategory', '/category', name, true);
+
   }
 
 }

@@ -7,6 +7,8 @@ import { SessionService } from 'src/app/core/services/session.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UserContextService } from 'src/app/core/services/user-context.service';
 import { environment } from 'src/environments/environment';
+import { AccountService } from 'src/app/core/services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +32,10 @@ export class LoginComponent implements OnInit {
     private toastService: ToastService,
     private routeStateService: RouteStateService,
     private sessionService: SessionService,
-    public translate: TranslateService,
-    private userContextService: UserContextService
+    //public translate: TranslateService,
+    private userContextService: UserContextService,
+    private accountService: AccountService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,14 +47,28 @@ export class LoginComponent implements OnInit {
   }
 
   onClickLogin() {
-    let user: User = this.userService.getUserByUserNameAndPassword(this.userName, this.password);
-    if (user) {
-      this.userContextService.setUser(user);
-      this.routeStateService.add("Dashboard", '/main/dashboard', null, true);
-      return;
-    }
-    this.toastService.addSingle('error', '', 'Invalid user.');
-    return;
+    // let user: User = this.userService.getUserByUserNameAndPassword(this.userName, this.password);
+    // if (user) {
+    //   this.userContextService.setUser(user);
+    //   this.routeStateService.add("Dashboard", '/main/dashboard', null, true);
+    //   return;
+    // }
+    // this.toastService.addSingle('error', '', 'Invalid user.');
+    // return;
+
+    this.accountService.Login(this.userName, this.password)
+      .then((response) => {
+        if(response){
+          this.toastService.addSingle('success', '', 'User Login');
+          // this.router.navigate(['/main/dashboard']);
+          this.userContextService.setUser(response);
+          this.routeStateService.add("Dashboard", '/main/dashboard', null, true); 
+        }
+        else{
+          this.toastService.addSingle('error', '', 'Not Login');
+        }
+      });
+
   }
 
   onLanguageChange($event) {
@@ -59,7 +77,7 @@ export class LoginComponent implements OnInit {
       this.locale = "en";
     }
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    this.translate.use(this.locale);
+    //this.translate.use(this.locale);
     this.sessionService.setItem("ng-prime-language", this.locale);
   }
 

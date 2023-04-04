@@ -11,6 +11,8 @@ export const environment = {
   DEV_USER_ID: 1896326,
   DEV_AUTH: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    // 'Content-type': 'multipart/form-data',
     'x-va-senderagent-id': '29B599D9-9C25-4B83-721E-C6CE6E0F35E1',
     'x-va-hash':
       'RjK5OC3PqvasroWe6UFYogdmQLG9MG/0UfRIK4f5JdLrryczbLyLJLZBxqB4/0L2IyWmOaTiHaExa6TRBSUfJw==',

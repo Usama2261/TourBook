@@ -3,16 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppUtils } from '../helpers/app-utils';
 import { AxioHelper } from '../helpers/axios-helper';
-import { User } from '../Models/user';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
-
-  url: string = "https://localhost:44383/api/";
-
-  
+export class AccountService { 
 
   constructor(private ax: AxioHelper, private utils: AppUtils) { }
 
@@ -21,6 +16,31 @@ export class AccountService {
       .getAxiosWithHeaders()
       .get(
         `${this.utils.GetAPIBaseUrl()}/api/Asf/GetAccountLocation?searchText=${searchText}`
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
+
+  createUser(model: any){
+    return this.ax
+      .getAxiosWithHeaders()
+      .post(
+        `${this.utils.GetAPIBaseUrl()}/api/Account/CreateUser`,
+        model
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
+
+  Login(userName: string, password: string){
+    return this.ax
+      .getAxiosWithHeaders()
+      .get(
+        `${this.utils.GetAPIBaseUrl()}/api/Account/Login?userName=${userName}&password=${password}`
       )
       .then((response: any) => {
         let result = response.data;

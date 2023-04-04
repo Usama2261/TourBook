@@ -41,7 +41,7 @@ export class RouteStateService {
         if (isParent) {
             this.removeAll();
         }
-
+        
         var routeStates = this.getFromStorage();
 
         var routeState = new RouteState();
@@ -51,6 +51,7 @@ export class RouteStateService {
 
         routeStates.push(routeState);
         this.saveToStorage(routeStates);
+        debugger
         this.navigate(routeState.path);
     }
 

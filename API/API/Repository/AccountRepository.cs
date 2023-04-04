@@ -30,5 +30,30 @@ namespace API.Repository
             await _context.SaveChangesAsync();
 
         }
+
+        public async Task<UserDto> Login(string userName, string password)
+        {
+            var user = _context.Users.Where(x => x.UserName == userName).FirstOrDefault();
+
+            if(user != null)
+            {
+                if(user.Password == password)
+                {
+                    var returnUser = new UserDto
+                    {
+                        DOB = user.DOB,
+                        FirstName = user.FirstName,
+                        Email = user.Email,
+                        Gender = user.Gender,
+                        Id = user.Id,
+                        LastName = user.LastName,
+                        UserName = user.UserName
+                    };
+                    return returnUser;
+                }
+            }
+
+            return null;
+        }
     }
 }

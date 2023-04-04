@@ -22,7 +22,7 @@ namespace API.Repository
         {
             var places = new List<Place>();
 
-            var cate = await _context.PlaceCategories.Where(x => x.Name == categoryName).FirstOrDefaultAsync();
+            var cate = await _context.PlaceCategories.Where(x => x.Name.ToLower() == categoryName.ToLower()).FirstOrDefaultAsync();
 
             if(cate != null)
             {

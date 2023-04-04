@@ -21,11 +21,11 @@ export class PlacesService {
       });
   }
 
-  getCategoryById(categoryName: string): any {
+  getCategoryByName(categoryName: string): any {
     return this.ax
       .getAxiosWithHeaders()
       .get(
-        `${this.utils.GetAPIBaseUrl()}/api/explore/GetCategoryById?categoryName=${categoryName}`
+        `${this.utils.GetAPIBaseUrl()}/api/explore/GetCategoryByName?categoryName=${categoryName}`
       )
       .then((response: any) => {
         let result = response.data;

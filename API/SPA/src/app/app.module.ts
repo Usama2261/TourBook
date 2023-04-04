@@ -1,6 +1,6 @@
 // angular default
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Prime NG
@@ -47,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
+  schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   exports: [TranslateModule],
   providers: [
     MessageService,
