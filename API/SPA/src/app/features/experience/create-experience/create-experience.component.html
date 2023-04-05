@@ -1,0 +1,33 @@
+<p-dialog header="header" [(visible)]="visible" [style]="{ width: '50vw' }">
+  <ng-template pTemplate="header">
+    <span class="text-xl font-bold">Add Experience</span>
+  </ng-template>
+  <div class="row">
+    <div class="form-group">
+      <label for="place">Select Place</label>
+      <p-dropdown [options]="placeList" name="places" inputStyleClass="form-control" required
+        styleClass="width-percent-100">
+      </p-dropdown>
+    </div>
+    <div class="form-group">
+      <label for="experience">Write Your Experience</label>
+      <div>
+        <textarea class="w-100 form-control" name="experience" id="experience" rows="5"></textarea>
+      </div>
+    </div>
+    <div id="imageUpload">
+      <label for="image">Upload Images</label>
+      <p-fileUpload name="demo[]" mode="advanced" showUploadButton="false" showCancelButton="false" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*"
+        maxFileSize="1000000">
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="visible = false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

@@ -23,8 +23,8 @@ const appRoutes: Routes = [
             canActivate: [AuthGuard]
         },
         {
-            path: 'departments',
-            loadChildren: () => import('src/app/features/department/department.module').then(m => m.DepartmentModule),
+            path: 'experience',
+            loadChildren: () => import('src/app/features/experience/experience.module').then(m => m.ExperienceModule),
             canActivate: [AuthGuard]
         },
         {
