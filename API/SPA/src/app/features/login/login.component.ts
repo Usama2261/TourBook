@@ -71,14 +71,22 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onLanguageChange($event) {
-    this.locale = $event.target.value;
-    if (this.locale == undefined || this.locale == null || this.locale.length == 0) {
-      this.locale = "en";
+  validateForm(): boolean{
+    if(this.userName.length > 0 && this.password.length > 0){
+      return false;
     }
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    //this.translate.use(this.locale);
-    this.sessionService.setItem("ng-prime-language", this.locale);
+
+    return true;
   }
+
+  // onLanguageChange($event) {
+  //   this.locale = $event.target.value;
+  //   if (this.locale == undefined || this.locale == null || this.locale.length == 0) {
+  //     this.locale = "en";
+  //   }
+  //   // the lang to use, if the lang isn't available, it will use the current loader to get them
+  //   //this.translate.use(this.locale);
+  //   this.sessionService.setItem("ng-prime-language", this.locale);
+  // }
 
 }

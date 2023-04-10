@@ -1,3 +1,5 @@
+import { Gender } from "../constants/enums";
+
 export class User{
     firstName: string = "";
     lastName: string = "";
@@ -5,5 +7,5 @@ export class User{
     password: string = "";
     dob: string = "";
     email: string = "";
-    gender: string = "";
+    gender: string = "Male";
 }

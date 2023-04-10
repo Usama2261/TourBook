@@ -25,28 +25,12 @@ width: 600px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
-}
-
-.social_icon span:hover{
-color: white;
-cursor: pointer;
-}
-
 .card-header h3{
 color: white;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
-}
 
-.input-group-prepend span{
+.input-group-prepend, .input-group-text{
 width: 50px;
 background-color: #FFC312;
 color: black;
@@ -57,18 +41,6 @@ input:focus{
 outline: 0 0 0 0  !important;
 box-shadow: 0 0 0 0 !important;
 
-}
-
-.remember{
-color: white;
-}
-
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
 }
 
 .signup_btn{
@@ -88,4 +60,8 @@ color: white;
 
 .links a{
 margin-left: 4px;
+}
+
+.form-check-label{
+    color: white;
 }

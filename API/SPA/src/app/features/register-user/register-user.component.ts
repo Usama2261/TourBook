@@ -32,13 +32,13 @@ export class RegisterUserComponent implements OnInit {
     private router: Router, 
     private fb: FormBuilder, 
     private toastService: ToastService,
-
     private _accountService: AccountService
-    ) { }
+    ) { 
+    }
 
   ngOnInit() {
     this.userform = this.fb.group({
-      'name': new FormControl('', Validators.required),
+      'firstname': new FormControl('', Validators.required),
       'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
       'emailId': new FormControl('', [Validators.required, Validators.email]),
       'birthDate': new FormControl('', [Validators.required, birthDateValidator])
