@@ -54,9 +54,9 @@ export class HeaderComponent implements OnInit {
     this.userIdle.onTimerStart().subscribe();
 
     // Start watch when time is up.
-    this.userIdle.onTimeout().subscribe(() => {
-      this.logout();
-    });
+    // this.userIdle.onTimeout().subscribe(() => {
+    //   this.logout();
+    // });
   }
 
   logout() {

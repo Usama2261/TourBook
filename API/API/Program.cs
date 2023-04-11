@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<Seed>();
 builder.Services.AddScoped<AccountRepository>();
 builder.Services.AddScoped<ExploreRepository>();
+builder.Services.AddScoped<ExperienceRepository>();
 
 var app = builder.Build();
 

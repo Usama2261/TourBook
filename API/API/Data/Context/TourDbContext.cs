@@ -11,5 +11,6 @@ namespace API.Data.Context
         public DbSet<User> Users { get; set; }
         public DbSet<PlaceCategory> PlaceCategories { get; set; }
         public DbSet<Place> Places { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
     }
 }

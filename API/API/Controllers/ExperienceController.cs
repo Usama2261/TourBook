@@ -1,4 +1,5 @@
-﻿using API.Repository;
+﻿using API.Data.Entities;
+using API.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -12,11 +13,18 @@ namespace API.Controllers
             _experienceRepo = experienceRepo;
         }
 
-        [HttpGet("GetUserExperience")]
-        public async Task<IActionResult> CreateUserExperience()
+        [HttpPost("CreateUserExperience")]
+        public async Task<IActionResult> CreateUserExperience([FromBody] Experience exp)
         {
-            await _experienceRepo.CreateUserExperience();
+            await _experienceRepo.CreateUserExperience(exp);
             return Ok();
-        }    
+        }
+
+        [HttpGet("GetAllPlaces")]
+        public async Task<IActionResult> GetAllPlaces()
+        {
+            var response = await _experienceRepo.GetAllPlaces();
+            return Ok(response);
+        }
     }
 }
