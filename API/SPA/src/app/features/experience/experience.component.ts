@@ -18,5 +18,6 @@ export class ExperienceComponent implements OnInit {
   addExperience(){
     this.createExperience.show();
   }
+  
 
 }

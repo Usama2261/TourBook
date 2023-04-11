@@ -48,4 +48,16 @@ export class AccountService {
       });
   }
 
+  IsUserExist(userName: string){
+    return this.ax
+      .getAxiosWithHeaders()
+      .get(
+        `${this.utils.GetAPIBaseUrl()}/api/Account/IsUserExist?userName=${userName}`
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
+
 }

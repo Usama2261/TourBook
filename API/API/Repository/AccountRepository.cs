@@ -55,5 +55,17 @@ namespace API.Repository
 
             return null;
         }
+
+        public async Task<bool> IsUserExist(string userName)
+        {
+            var user = _context.Users.Where(x => x.UserName == userName).FirstOrDefault();
+
+            if(user != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

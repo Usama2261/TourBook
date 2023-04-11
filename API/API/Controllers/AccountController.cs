@@ -36,5 +36,13 @@ namespace API.Controllers
         {
             return Ok();
         }
+
+        [HttpGet("IsUserExist")]
+        public async Task<IActionResult> IsUserExist(string userName)
+        {
+            var response = _accountRepo.IsUserExist(userName);
+
+            return Ok(response);
+        }
     }
 }

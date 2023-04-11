@@ -1,4 +1,4 @@
-<p-dialog header="header" [(visible)]="visible" [style]="{ width: '50vw' }">
+<p-dialog header="header" [(visible)]="visible" [style]="{ width: '50vw' }" modal="true">
   <ng-template pTemplate="header">
     <span class="text-xl font-bold">Add Experience</span>
   </ng-template>
@@ -17,14 +17,18 @@
     </div>
     <div id="imageUpload">
       <label for="image">Upload Images</label>
-      <p-fileUpload name="demo[]" mode="advanced" showUploadButton="false" showCancelButton="false" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*"
-        maxFileSize="1000000">
+      <p-fileUpload name="demo[]" mode="advanced" showUploadButton="false" showCancelButton="false"
+        (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
         <ng-template pTemplate="content">
           <ul *ngIf="uploadedFiles.length">
             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
           </ul>
         </ng-template>
       </p-fileUpload>
+    </div>
+    <br>
+    <div class="form-group my-4">
+      <button type="submit" class="btn btn-success float-end">Save</button>
     </div>
   </div>
   <ng-template pTemplate="footer">

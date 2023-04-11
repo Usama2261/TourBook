@@ -7,61 +7,68 @@
 } */
 
 
-.main{
-height: 100%;
-align-content: center;
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
-background-size: cover;
-background-repeat: no-repeat;
-height: 100%;
-font-family: 'Numans', sans-serif;
+.main {
+    height: 100%;
+    align-content: center;
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
 }
 
-.card{
-height: 450px;
-margin-top: auto;
-margin-bottom: auto;
-width: 600px;
-background-color: rgba(0,0,0,0.5) !important;
+.card {
+    height: 450px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 600px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.card-header h3{
-color: white;
+.card-header h3 {
+    color: white;
 }
 
 
-.input-group-prepend, .input-group-text{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+.input-group-prepend,
+.input-group-text {
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border: 0 !important;
 }
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
 
 }
 
-.signup_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+.signup_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
 }
 
-.signup_btn:hover{
-color: black;
-background-color: white;
+.login_btn {
+    color: black;
+    background-color: #FFC312;
+    width: 150px;
 }
 
-.links{
-color: white;
+.signup_btn:hover {
+    color: black;
+    background-color: white;
 }
 
-.links a{
-margin-left: 4px;
+.links {
+    color: white;
 }
 
-.form-check-label{
+.links a {
+    margin-left: 4px;
+}
+
+.form-check-label {
     color: white;
 }

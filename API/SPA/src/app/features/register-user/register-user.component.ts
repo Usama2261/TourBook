@@ -16,46 +16,23 @@ import { AccountService } from 'src/app/core/services/account.service';
 export class RegisterUserComponent implements OnInit {
 
   user: User = new User();
-
-  userform: FormGroup;
-
-  name: string;
-
-  emailId: string;
-
-  password: string;
-
-  version: string;
+  isAlert: boolean = false;
+  alertMessage: string = '';
 
   constructor(
-    private userService: UserDataService, 
-    private router: Router, 
-    private fb: FormBuilder, 
+    private userService: UserDataService,
+    private router: Router,
+    private fb: FormBuilder,
+    private _accountService: AccountService,
     private toastService: ToastService,
-    private _accountService: AccountService
-    ) { 
-    }
+  ) {
+  }
 
   ngOnInit() {
-    this.userform = this.fb.group({
-      'firstname': new FormControl('', Validators.required),
-      'password': new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
-      'emailId': new FormControl('', [Validators.required, Validators.email]),
-      'birthDate': new FormControl('', [Validators.required, birthDateValidator])
-    });
 
-    this.version = environment.version;
   }
 
   onClickRegisterUser() {
-    // let isRegistered: boolean = this.userService.addUser(this.userform.controls["name"].value,
-    //   this.userform.controls["password"].value,
-    //   this.userform.controls["emailId"].value,
-    //   this.userform.controls["birthDate"].value);
-    // if (isRegistered) {
-    //   this.router.navigate(['/login']);
-    //   this.toastService.addSingle("success", "", "User registered.")
-    // }
 
     let model = {};
     model["firstName"] = this.user.firstName;
@@ -64,16 +41,50 @@ export class RegisterUserComponent implements OnInit {
     model["password"] = this.user.password;
     model["dob"] = this.user.dob;
     model["email"] = this.user.email;
-    model["gender"] = 0;
+    model["gender"] = this.user.gender == "Male" ? 0 : 1;
 
     this._accountService.createUser(model)
       .then((response: any) => {
-
+        this.toastService.addSingle('success', '', 'User Registered');
+        this.router.navigate(['/login']);
       })
   }
 
-  onClickGoToLogin() {
-    this.router.navigate(['/login']);
+  validateRegisterForm(): boolean {
+    if (this.user.firstName.length > 0 &&
+      this.user.lastName.length > 0 &&
+      this.user.email.length > 0 &&
+      this.user.password.length > 0 &&
+      this.user.dob.length > 0
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  onUserInput(){
+    this._accountService.IsUserExist(this.user.userName)
+      .then((response) => {
+        let data = response.result
+        if(data){
+          this.isAlert = true;
+          this.alertMessage = "User name already exist";
+        }
+        else{
+          this.isAlert = false;
+        }
+      })
+  }
+
+  onConfirmPassword(event: any){
+    let confirmPass = event.target.value;
+    if(this.user.password !== confirmPass){
+      this.isAlert = true;
+      this.alertMessage = "Password not match!!!";
+    }
+    else{
+      this.isAlert = false;
+    }
   }
 
 }
