@@ -33,7 +33,7 @@ namespace API.Repository
             {
                 var obj = new UserExperienceImage
                 {
-                    UserId = 1,
+                    //UserId = 1,
                     ExperienceId = images.ExperienceId,
                     CreatedBy = 1,
                     CreatedDate = DateTime.Now,
@@ -44,6 +44,45 @@ namespace API.Repository
             }
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<GetExperiencyByUserDto>> GetAllExperienceByUser(int userId)
+        {
+            var returnList = new List<GetExperiencyByUserDto>();
+
+            var experience = _context.Experiences.Where(x => x.UserId == userId).ToList();
+
+            var allCategories = _context.PlaceCategories.ToList();
+
+            var allPlaces = _context.Places.ToList();
+
+            foreach (var item in experience)
+            {
+                var experienceImages = _context.UserExperienceImages.Where(x => x.ExperienceId == item.Id).ToList();
+
+                var imageList = new List<GetUserExperienceImageDto>();
+
+                foreach (var image in experienceImages)
+                {
+                    var imageObj = new GetUserExperienceImageDto();
+                    imageObj.Id = image.Id;
+                    imageObj.ImageContent = "data:image/png;base64," + image.ImageContent;
+
+                    imageList.Add(imageObj);
+                }
+
+                var obj = new GetExperiencyByUserDto();
+                obj.ExperienceId = item.Id;
+                obj.CategoryName = allCategories.Find(x => x.Id == item.CategoryId)?.Name ?? "";
+                obj.PlaceName = allPlaces.Find(x => x.Id == item.PlaceId)?.Name ?? "";
+                obj.ExperienceStory = item.ExperienceStory;
+                obj.Images = imageList;
+
+                returnList.Add(obj);
+
+            }
+
+            return returnList;
         }
 
         public async Task<List<Place>> GetAllPlaces()

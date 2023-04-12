@@ -27,7 +27,7 @@ export class CreateExperienceComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCategories();
-    this.getAllPlaces();
+    //this.getAllPlaces();
   }
 
   show() {
@@ -47,7 +47,7 @@ export class CreateExperienceComponent implements OnInit {
         var reader = new FileReader();
         reader.onload = (event: any) => {
           this.imagesList.push(event.target.result);
-
+          console.log(event.target.result)
           //  this.myForm.patchValue({
           //     fileSource: this.images
           //  });
@@ -59,17 +59,24 @@ export class CreateExperienceComponent implements OnInit {
     this.image = undefined
   }
 
-  getAllPlaces() {
-    this.experienceService.GetAllPlaces()
-      .then((response: any) => {
-        this.placeList = response
-      })
-  }
+  // getAllPlaces() {
+  //   this.experienceService.GetAllPlaces()
+  //     .then((response: any) => {
+  //       this.placeList = response
+  //     })
+  // }
 
   getAllCategories() {
     this.placesService.getAllCategories()
       .then((response) => {
         this.categoryList = response;
+      })
+  }
+
+  loadPlaces(categoryName){
+    this.placesService.getCategoryByName(categoryName)
+      .then((response: any) => {
+        this.placeList = response;
       })
   }
 

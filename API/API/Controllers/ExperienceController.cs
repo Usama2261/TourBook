@@ -30,6 +30,14 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpGet("GetAllExperienceByUser")]
+        public async Task<IActionResult> GetAllExperienceByUser(int userId)
+        {
+            var response =  await _experienceRepo.GetAllExperienceByUser(userId);
+
+            return Ok(response);
+        }
+
         [HttpGet("GetAllPlaces")]
         public async Task<IActionResult> GetAllPlaces()
         {

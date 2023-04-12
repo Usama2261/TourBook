@@ -6,5 +6,16 @@
     </button>
   </div>
 </div>
+<div class="row ">
+  <h1>My Experiences</h1>
+  <div class="card mx-4 my-2" *ngFor="let exp of experiencList" 
+      style="width: 15rem; cursor:pointer">
+      <div class="card-body">
+        <img class="my-1 mx-auto" [src]="exp.images[0]?.imageContent" width="200" height="200">
+        <h5 class="card-title my-1">{{exp.placeName}}</h5>
+        <p>{{exp.experienceStory}}</p>
+      </div>
+  </div>
+</div>
 
 <app-create-experience #createExperience></app-create-experience>

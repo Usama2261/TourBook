@@ -47,4 +47,15 @@ export class ExperienceService {
       });
   }
 
+  GetAllExperienceByUser(userId: number) {
+    return this.ax
+      .getAxiosWithHeaders()
+      .get(
+        `${this.utils.GetAPIBaseUrl()}/api/Experience/GetAllExperienceByUser?userId=${userId}`
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
 }

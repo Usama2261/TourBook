@@ -8,6 +8,7 @@ namespace API.Data.Entities
         public long Id { get; set; }
         public int CategoryId { get; set; }
         public long PlaceId { get; set; }
+        public int UserId { get; set; }
         public string ExperienceStory { get; set; }
     }
 }
