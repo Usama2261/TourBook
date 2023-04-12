@@ -6,35 +6,41 @@
     <div class="form-group my-2">
       <label for="place"><strong>Select Category</strong></label>
       <p-dropdown [options]="categoryList" name="category" inputStyleClass="form-control" required
-        [(ngModel)]="selectedCategory" styleClass="width-percent-100" 
-        optionLabel="name" optionValue="id" placeholder="Select Category">
+        [(ngModel)]="selectedCategory" styleClass="width-percent-100" optionLabel="name" optionValue="id"
+        placeholder="Select Category">
       </p-dropdown>
     </div>
     <div class="form-group my-2">
       <label for="place"><strong>Select Place</strong></label>
       <p-dropdown [options]="placeList" name="places" inputStyleClass="form-control" required
-       [(ngModel)]="selectedPlace" styleClass="width-percent-100" 
-       optionLabel="name" optionValue="id" placeholder="Select Place">
+        [(ngModel)]="selectedPlace" styleClass="width-percent-100" optionLabel="name" optionValue="id"
+        placeholder="Select Place">
       </p-dropdown>
     </div>
     <div class="form-group my-2">
       <label for="experience"><strong>Write Your Experience</strong></label>
       <div>
-        <textarea class="w-100 form-control" [(ngModel)]="expStory"
-            name="experience" id="experience" rows="5">
+        <textarea class="w-100 form-control" [(ngModel)]="expStory" name="experience" id="experience" rows="5">
         </textarea>
       </div>
     </div>
     <div id="imageUpload" class="my-2">
       <label for="image"><strong>Upload Images</strong></label>
-      <p-fileUpload name="demo[]" mode="advanced" showUploadButton="false" showCancelButton="false"
+      <!-- <p-fileUpload name="demo[]" mode="advanced"
         (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
         <ng-template pTemplate="content">
           <ul *ngIf="uploadedFiles.length">
             <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
           </ul>
         </ng-template>
-      </p-fileUpload>
+      </p-fileUpload> -->
+      <input name="image" id="file" type="file" accept="image/*"  [(ngModel)]="image"
+        class="form-control" multiple="" (change)="onFileChange($event)">
+    </div>
+    <div class="form-group my-2 d-flex">
+      <div class="mx-4" *ngFor="let image of imagesList">
+        <img [src]="image" alt="image Show" height="100" width="100">
+      </div>
     </div>
     <br>
     <div class="form-group my-4">

@@ -1,8 +1,11 @@
+<h1>Explore Places by Category</h1>
+<hr>
 <div class="row">
-  <div class="col-md-3 py-4 px-4 align-item-center" *ngFor="let cat of categoryList" 
-      (click)="onCategoryClick(cat.name)">
-    <img [src]="cat.imagePath" width="200" height="200">
-    <br>
-    <h4 class="py-2">{{cat.name}}</h4>
+  <div class="card mx-4 my-2" *ngFor="let cat of categoryList" 
+    style="width: 18rem; cursor:pointer" (click)="onCategoryClick(cat.name)">
+    <h2 class="card-title my-1 mx-auto">{{cat.name}}</h2>
+      <div class="card-body">
+        <img class="my-1 mx-auto" [src]="cat.imagePath" width="200" height="200">
+      </div>
   </div>
 </div>

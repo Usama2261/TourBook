@@ -22,6 +22,19 @@ export class ExperienceService {
       });
   }
 
+  UploadImages(model: any){
+    return this.ax
+      .getAxiosWithHeaders()
+      .post(
+        `${this.utils.GetAPIBaseUrl()}/api/Experience/UploadImages`,
+        model
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
+
   GetAllPlaces() {
     return this.ax
       .getAxiosWithHeaders()

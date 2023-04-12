@@ -1,4 +1,5 @@
 ﻿using API.Data.Entities;
+using API.Models;
 using API.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,16 @@ namespace API.Controllers
         [HttpPost("CreateUserExperience")]
         public async Task<IActionResult> CreateUserExperience([FromBody] Experience exp)
         {
-            await _experienceRepo.CreateUserExperience(exp);
+            var response = await _experienceRepo.CreateUserExperience(exp);
+
+            return Ok(response);
+        }
+
+        [HttpPost("UploadImages")]
+        public async Task<IActionResult> UploadImages([FromBody] ImageUploadRequest request)
+        {
+            await _experienceRepo.CreateUserExperienceImages(request);
+
             return Ok();
         }
 

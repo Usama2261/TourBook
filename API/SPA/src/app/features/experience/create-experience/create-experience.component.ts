@@ -18,6 +18,9 @@ export class CreateExperienceComponent implements OnInit {
   selectedPlace: any;
   expStory: string = '';
 
+  imagesList = [];
+  image: any;
+
   constructor(
     private experienceService: ExperienceService,
     private placesService: PlacesService) { }
@@ -37,29 +40,63 @@ export class CreateExperienceComponent implements OnInit {
     }
   }
 
-  getAllPlaces(){
+  onFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.imagesList.push(event.target.result);
+
+          //  this.myForm.patchValue({
+          //     fileSource: this.images
+          //  });
+        }
+
+        reader.readAsDataURL(event.target.files[i]);
+      }
+    }
+    this.image = undefined
+  }
+
+  getAllPlaces() {
     this.experienceService.GetAllPlaces()
       .then((response: any) => {
         this.placeList = response
       })
   }
 
-  getAllCategories(){
+  getAllCategories() {
     this.placesService.getAllCategories()
       .then((response) => {
         this.categoryList = response;
       })
   }
 
-  onSave(){
-    let model:any = {};
-    model["CategoryId"]= this.selectedCategory?.id;
-    model["PlaceId"]= this.selectedPlace?.id;
-    model["ExperienceStory"]= this.expStory;
-
+  onSave() {
+    let model: any = {};
+    model["CategoryId"] = this.selectedCategory?.id;
+    model["PlaceId"] = this.selectedPlace?.id;
+    model["ExperienceStory"] = this.expStory;
     this.experienceService.CreateExperience(model)
       .then((response) => {
+        this.saveImages(response);
+      });
+  }
 
+  saveImages(experienceId: number) {
+    let imageBase64List = [];
+    let fileReader = new FileReader();
+    for (let i = 0; i < this.imagesList.length; i++) {
+      let imageBase64 = this.imagesList[i].split(',')[1];
+      imageBase64List.push(imageBase64);
+    }
+    let requestBody: any = {};
+    requestBody["ExperienceId"] = experienceId;
+    requestBody["imagesBase64"] = imageBase64List;
+    this.experienceService.UploadImages(requestBody)
+      .then((response: any) => {
+        this.visible = false
       });
   }
 
