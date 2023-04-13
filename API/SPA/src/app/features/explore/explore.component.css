@@ -1,3 +1,10 @@
 img {
     border-radius: 50%;
+    border: 2px solid white;
+  }
+
+  .card{
+    width: 18rem;
+    cursor: pointer;
+    background-color: rgb(97, 237, 72);
   }

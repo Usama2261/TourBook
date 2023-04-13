@@ -13,6 +13,7 @@ namespace API.Data.Entities
         public string Country { get; set; }
         public string FullAddress { get; set; }
         public string LocationAddress { get; set; }
+        public string ImagePath { get; set; }
         public int CategoryId { get; set; }
     }
 }
