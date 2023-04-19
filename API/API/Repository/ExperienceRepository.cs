@@ -1,6 +1,7 @@
 ﻿using API.Data.Context;
 using API.Data.Entities;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository
 {
@@ -90,6 +91,42 @@ namespace API.Repository
             var places = _context.Places.ToList();
 
             return places;
+        }
+
+        public async Task<GetExperiencyByUserDto> GetExperienceDetail(long experienceId)
+        {
+            var experience = await _context.Experiences.FirstOrDefaultAsync(x => x.Id == experienceId);
+
+            var obj = new GetExperiencyByUserDto();
+
+            if (experience != null)
+            {
+                var allCategories = await _context.PlaceCategories.ToListAsync();
+
+                var allPlaces = await _context.Places.ToListAsync();
+
+                var experienceImages = await _context.UserExperienceImages.Where(x => x.ExperienceId == experienceId).ToListAsync();
+
+                var imageList = new List<GetUserExperienceImageDto>();
+
+                foreach (var image in experienceImages)
+                {
+                    var imageObj = new GetUserExperienceImageDto();
+                    imageObj.Id = image.Id;
+                    imageObj.ImageContent = "data:image/png;base64," + image.ImageContent;
+
+                    imageList.Add(imageObj);
+                }
+
+                obj.ExperienceId = experienceId;
+                obj.CategoryName = allCategories.Find(x => x.Id == experience.CategoryId)?.Name ?? "";
+                obj.PlaceName = allPlaces.Find(x => x.Id == experience.PlaceId)?.Name ?? "";
+                obj.PlaceImagePath = allPlaces.Find(x => x.Id == experience.PlaceId)?.ImagePath ?? "";
+                obj.ExperienceStory = experience.ExperienceStory;
+                obj.Images = imageList;
+            }
+
+            return obj;
         }
     }
 }

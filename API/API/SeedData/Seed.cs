@@ -13,8 +13,8 @@ namespace API.SeedData
 
         public async Task SeedData()
         {
-            await AddCategories();
-            await AddPlaces();
+            //await AddCategories();
+            //await AddPlaces();
         }
 
 
@@ -44,6 +44,8 @@ namespace API.SeedData
                 new PlaceCategory { Id = 15, Name = "Beaches", ImagePath = "assets/category/beach.jpg"},
                 new PlaceCategory { Id = 16, Name = "Deserts", ImagePath = "assets/category/desert.jpg"}
             };
+
+
 
             await _context.PlaceCategories.AddRangeAsync(categories);
             await _context.SaveChangesAsync();

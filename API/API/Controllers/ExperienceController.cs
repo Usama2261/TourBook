@@ -44,5 +44,12 @@ namespace API.Controllers
             var response = await _experienceRepo.GetAllPlaces();
             return Ok(response);
         }
+
+        [HttpGet("GetExperienceDetail")]
+        public async Task<IActionResult> GetExperienceDetail(long experienceId)
+        {
+            var response = await _experienceRepo.GetExperienceDetail(experienceId);
+            return Ok(response);
+        }
     }
 }

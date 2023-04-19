@@ -31,6 +31,9 @@ export class CreateExperienceComponent implements OnInit {
   }
 
   show() {
+    this.selectedCategory = undefined;
+    this.selectedPlace = undefined;
+    this.expStory = '';
     this.visible = true;
   }
 
@@ -89,6 +92,17 @@ export class CreateExperienceComponent implements OnInit {
       .then((response) => {
         this.saveImages(response);
       });
+  }
+
+  checkValidation(){
+    if(this.selectedCategory?.id > 0 && 
+      this.selectedPlace?.id > 0 && 
+      this.expStory.length > 0)
+      {
+        return false;
+      }
+
+      return true;
   }
 
   saveImages(experienceId: number) {

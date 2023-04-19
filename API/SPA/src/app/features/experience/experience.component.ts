@@ -3,6 +3,7 @@ import { CreateExperienceComponent } from './create-experience/create-experience
 import { User } from 'src/app/core/models/user.model';
 import { SessionService } from 'src/app/core/services/session.service';
 import { ExperienceService } from 'src/app/core/services/experience.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-experience',
@@ -18,6 +19,7 @@ export class ExperienceComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
+    private router: Router,
     private experienceService: ExperienceService) { }
 
   ngOnInit() {
@@ -37,5 +39,9 @@ export class ExperienceComponent implements OnInit {
       })
   }
   
+  onExperienceClick(id: any){
+    debugger
+    this.router.navigate(['/main/experience/',id])
+  }
 
 }
