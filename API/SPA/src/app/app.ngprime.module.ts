@@ -19,6 +19,7 @@ import { MessagesModule } from 'primeng/messages';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CarouselModule } from 'primeng';
 
 @NgModule({
     exports: [
@@ -41,7 +42,8 @@ import { FileUploadModule } from 'primeng/fileupload';
         MessagesModule,
         DialogModule,
         DropdownModule,
-        FileUploadModule
+        FileUploadModule,
+        CarouselModule 
     ]
 })
 export class NgPrimeModule { }

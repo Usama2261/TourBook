@@ -4,6 +4,7 @@ import { ExperienceComponent } from './experience.component';
 import { ExploreRoutingModule } from './experience.routing';
 import { AppCommonModule } from 'src/app/app.common.module';
 import { CreateExperienceComponent } from './create-experience/create-experience.component';
+import { ExperienceDetailComponent } from './experience-detail/experience-detail.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import { CreateExperienceComponent } from './create-experience/create-experience
     ExploreRoutingModule,
     AppCommonModule,
   ],
-  declarations: [ExperienceComponent, CreateExperienceComponent]
+  declarations: [ExperienceComponent, CreateExperienceComponent, ExperienceDetailComponent]
 })
 export class ExperienceModule { }

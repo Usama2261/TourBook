@@ -174,9 +174,9 @@ namespace API.Migrations
                     b.Property<long>("ExperienceId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("ImageContent")
+                    b.Property<byte[]>("ImageContent")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 

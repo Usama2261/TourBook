@@ -2,6 +2,7 @@
 using API.Data.Entities;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace API.Repository
 {
@@ -38,8 +39,8 @@ namespace API.Repository
                     ExperienceId = images.ExperienceId,
                     CreatedBy = 1,
                     CreatedDate = DateTime.Now,
-                    ImageContent = imageBase64
-                };
+                    ImageContent = Convert.FromBase64String(imageBase64)
+            };
 
                 _context.UserExperienceImages.Add(obj);
             }
@@ -67,7 +68,7 @@ namespace API.Repository
                 {
                     var imageObj = new GetUserExperienceImageDto();
                     imageObj.Id = image.Id;
-                    imageObj.ImageContent = "data:image/png;base64," + image.ImageContent;
+                    imageObj.ImageContent = "data:image/png;base64," + Encoding.UTF8.GetString(image.ImageContent, 0, image.ImageContent.Length);
 
                     imageList.Add(imageObj);
                 }
@@ -113,7 +114,7 @@ namespace API.Repository
                 {
                     var imageObj = new GetUserExperienceImageDto();
                     imageObj.Id = image.Id;
-                    imageObj.ImageContent = "data:image/png;base64," + image.ImageContent;
+                    imageObj.ImageContent = "data:image/png;base64," + Convert.ToBase64String(image.ImageContent, 0, image.ImageContent.Length);
 
                     imageList.Add(imageObj);
                 }
@@ -122,6 +123,7 @@ namespace API.Repository
                 obj.CategoryName = allCategories.Find(x => x.Id == experience.CategoryId)?.Name ?? "";
                 obj.PlaceName = allPlaces.Find(x => x.Id == experience.PlaceId)?.Name ?? "";
                 obj.PlaceImagePath = allPlaces.Find(x => x.Id == experience.PlaceId)?.ImagePath ?? "";
+                obj.PlaceLocation = allPlaces.Find(x => x.Id == experience.PlaceId)?.LocationAddress ?? "";
                 obj.ExperienceStory = experience.ExperienceStory;
                 obj.Images = imageList;
             }

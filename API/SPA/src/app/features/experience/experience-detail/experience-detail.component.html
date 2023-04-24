@@ -1,56 +1,46 @@
 <div class="container-fliud">
   <div class="wrapper row">
-    <!-- <div class="preview col-md-6">
-      
-      <div class="preview-pic tab-content">
-        <div class="tab-pane" id="pic-1"><img src="http://placekitten.com/400/252"></div>
-        <div class="tab-pane active" id="pic-2"><img src="http://placekitten.com/400/252"></div>
-        <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252"></div>
-        <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252"></div>
-        <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252"></div>
-      </div>
-      <ul class="preview-thumbnail nav nav-tabs">
-        <li class=""><a data-target="#pic-1" data-toggle="tab" aria-expanded="false"><img src="http://placekitten.com/200/126"></a></li>
-        <li class="active"><a data-target="#pic-2" data-toggle="tab" aria-expanded="true"><img src="http://placekitten.com/200/126"></a></li>
-        <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126"></a></li>
-        <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126"></a></li>
-        <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126"></a></li>
-      </ul>
-    </div> -->
     <div class="details col-md-6">
       <h3 class="product-title">{{experience?.placeName}}</h3>
-      <div class="rating">
-        <div class="stars">
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-        </div>
-        <span class="review-no">41 reviews</span>
-      </div>
       <p class="product-description">{{experience?.experienceStory}}</p>
       <h4 class="price">Category: <span>{{experience?.categoryName}}</span></h4>
       <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
-      <h5 class="sizes">sizes:
-        <span class="size" data-toggle="tooltip" title="small">s</span>
-        <span class="size" data-toggle="tooltip" title="medium">m</span>
-        <span class="size" data-toggle="tooltip" title="large">l</span>
-        <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-      </h5>
-      <h5 class="colors">colors:
-        <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-        <span class="color green"></span>
-        <span class="color blue"></span>
-      </h5>
-      <div class="action">
-        <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-        <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
-      </div>
     </div>
 
-    <div class="col-md-6">
-      
+    <div class="col-md-6" *ngIf="isIframe">
+      <iframe [src]="safeUrl" frameborder="0" width="600" height="400"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p-carousel [value]="experience?.images" [numVisible]="3" [numScroll]="3" [circular]="false"
+        [responsiveOptions]="responsiveOptions">
+        <ng-template let-image pTemplate="item">
+          <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+            <div class="mb-3">
+              <img [src]="image.imageContent" [alt]="image.id" class="w-6 shadow-2" width="100" height="100" />
+            </div>
+            <!-- <div>
+                    <h4 class="mb-1">{{ product.name }}</h4>
+                    <h6 class="mt-0 mb-3">{{ '$' + product.price }}</h6>
+                    <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag>
+                    <div class="car-buttons mt-5">
+                        <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                        <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+                    </div>
+                </div> -->
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-md-12 d-flex">
+      <div *ngFor="let img of experience?.images">
+        <img [src]="img.imageContent" alt="" width="100" height="100">
+      </div>
+    </div>
+  </div> -->
 </div>

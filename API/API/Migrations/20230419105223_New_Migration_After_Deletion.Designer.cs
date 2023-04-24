@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(TourDbContext))]
-    [Migration("20230412043603_Added_Entity_UserExperienceImage")]
-    partial class Added_Entity_UserExperienceImage
+    [Migration("20230419105223_New_Migration_After_Deletion")]
+    partial class New_Migration_After_Deletion
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,9 @@ namespace API.Migrations
 
                     b.Property<long>("PlaceId")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -72,6 +75,10 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -170,12 +177,9 @@ namespace API.Migrations
                     b.Property<long>("ExperienceId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("ImageContent")
+                    b.Property<byte[]>("ImageContent")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
