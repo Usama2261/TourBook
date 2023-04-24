@@ -30,7 +30,7 @@ export class ExploreComponent implements OnInit {
   }
 
   onCategoryClick(name: string){
-    this.router.navigate(['/main/explore', name]);
+    this.router.navigate(['/main/explore/places', name]);
     // this.routeStateService.add('PlaceByCategory', '/category', name, true);
 
   }

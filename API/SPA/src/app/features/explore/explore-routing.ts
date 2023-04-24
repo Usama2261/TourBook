@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ExploreComponent } from './explore.component';
 import { PlacesByCategoryComponent } from './places-by-category/places-by-category.component';
+import { PlaceDetailComponent } from './place-detail/place-detail.component';
 
 
 const routes: Routes = [
@@ -10,8 +11,12 @@ const routes: Routes = [
       component: ExploreComponent
   },
   {
-    path: ':name',
+    path: 'places/:name',
     component: PlacesByCategoryComponent
+  },
+  {
+    path: 'detail/:id',
+    component: PlaceDetailComponent
   }
 ];
 

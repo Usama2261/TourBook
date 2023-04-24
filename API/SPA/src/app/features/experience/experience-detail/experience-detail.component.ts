@@ -56,7 +56,6 @@ export class ExperienceDetailComponent implements OnInit {
 
   sanitizeURl(url){
     this.isIframe = true;
-    debugger
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

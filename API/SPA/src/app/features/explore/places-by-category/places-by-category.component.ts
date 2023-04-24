@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlacesService } from 'src/app/core/services/places.service';
 
 @Component({
@@ -12,7 +12,10 @@ export class PlacesByCategoryComponent implements OnInit {
   categoryName: string = "";
   placeList: any[] = [];
 
-  constructor(private _activatedRoute: ActivatedRoute, private _placeService: PlacesService) { }
+  constructor(
+    private _activatedRoute: ActivatedRoute, 
+    private _placeService: PlacesService,
+    private router: Router) { }
 
   ngOnInit() {
     this.categoryName = this._activatedRoute.snapshot.paramMap.get('name') ?? "";
@@ -22,9 +25,11 @@ export class PlacesByCategoryComponent implements OnInit {
   getPlacesByCategoryName(categoryName: string){
     this._placeService.getCategoryByName(categoryName)
       .then((result: any) => {
-        debugger
         this.placeList = result;
       });
   }
 
+  goToDetail(id: any){
+    this.router.navigate(['/main/explore/detail', id])
+  }
 }

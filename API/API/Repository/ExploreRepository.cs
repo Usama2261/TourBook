@@ -31,5 +31,12 @@ namespace API.Repository
 
             return places;
         }
+
+        public async Task<Place> GetPlaceById(long Id)
+        {
+            var place = await _context.Places.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+            return place;
+        }
     }
 }

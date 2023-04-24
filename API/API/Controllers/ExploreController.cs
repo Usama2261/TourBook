@@ -27,5 +27,13 @@ namespace API.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("GetPlaceById")]
+        public async Task<IActionResult> GetPlaceById(long Id)
+        {
+            var response = await _exploreRepository.GetPlaceById(Id);
+
+            return Ok(response);
+        }
     }
 }

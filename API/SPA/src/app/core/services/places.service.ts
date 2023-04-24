@@ -33,4 +33,16 @@ export class PlacesService {
       });
   }
 
+  getPlaceById(id: any){
+    return this.ax
+      .getAxiosWithHeaders()
+      .get(
+        `${this.utils.GetAPIBaseUrl()}/api/explore/GetPlaceById?Id=${id}`
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
+
 }

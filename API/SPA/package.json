@@ -28,6 +28,7 @@
     "angular-user-idle": "^2.2.1",
     "axios": "^0.21.4",
     "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.4",
     "chart.js": "^2.9.3",
     "primeflex": "^1.0.0",
     "primeicons": "^2.0.0",
