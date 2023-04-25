@@ -30,11 +30,25 @@ export class CreateExperienceComponent implements OnInit {
     //this.getAllPlaces();
   }
 
-  show() {
-    this.selectedCategory = undefined;
-    this.selectedPlace = undefined;
-    this.expStory = '';
-    this.visible = true;
+  show(expId?: any) {
+    if(!expId){
+      this.selectedCategory = undefined;
+      this.selectedPlace = undefined;
+      this.expStory = '';
+      this.visible = true;
+    }
+    else{
+      this.experienceService.GetExperienceDetail(expId)
+        .then(response => {
+          if(response){
+            debugger
+            this.selectedCategory = this.categoryList.find(x => x.name == response.categoryName).id;
+            this.selectedPlace = response.placeName;
+            this.expStory = response.experienceStory;
+            this.visible = true;
+          }
+        })
+    }
   }
 
   onUpload(event: any) {

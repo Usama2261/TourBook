@@ -68,7 +68,7 @@ namespace API.Repository
                 {
                     var imageObj = new GetUserExperienceImageDto();
                     imageObj.Id = image.Id;
-                    imageObj.ImageContent = "data:image/png;base64," + Encoding.UTF8.GetString(image.ImageContent, 0, image.ImageContent.Length);
+                    imageObj.ImageContent = "data:image/png;base64," + Convert.ToBase64String(image.ImageContent, 0, image.ImageContent.Length);
 
                     imageList.Add(imageObj);
                 }

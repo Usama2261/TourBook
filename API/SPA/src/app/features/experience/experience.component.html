@@ -7,15 +7,20 @@
   </div>
 </div>
 <hr>
-<div class="row ">
+<div class="row">
   <h1>My Experiences</h1>
-  <div class="card mx-4 my-2" *ngFor="let exp of experiencList" 
-      style="width: 15rem; cursor:pointer">
-      <div class="card-body" (click)="onExperienceClick(exp.experienceId)">
-        <img class="my-1 mx-auto" [src]="exp.images[0]?.imageContent" width="200" height="200">
-        <h5 class="card-title my-1">{{exp.placeName}}</h5>
-        <!-- <p>{{exp.experienceStory}}</p> -->
-      </div>
+  <div class="card flex mx-4 my-2" *ngFor="let exp of experiencList" style="width: 15rem; cursor:pointer; padding: 0;">
+    <div class="card-img-top">
+      <img class="img-fluid mx-auto d-block" [src]="exp.images[0]?.imageContent"
+        (click)="onExperienceClick(exp.experienceId)">
+      <button class="btn btn-danger btn-sm float-end delete_button">
+        <i class="bi bi-trash-fill"></i></button>
+      <button class="btn btn-secondary btn-sm float-end edit_button" (click)="onEdit(exp.experienceId)">
+        <i class="bi bi-pencil-square"></i></button>
+    </div>
+    <div class="card-title mx-1 my-1">
+      <h6>{{exp.placeName}}</h6>
+    </div>
   </div>
   <div *ngIf="experiencList?.length == 0">
     <p>No Experience Found</p>

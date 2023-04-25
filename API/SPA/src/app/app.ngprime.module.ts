@@ -19,7 +19,8 @@ import { MessagesModule } from 'primeng/messages';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
-import { CarouselModule } from 'primeng';
+import { CarouselModule, MenuModule } from 'primeng';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
     exports: [
@@ -43,7 +44,9 @@ import { CarouselModule } from 'primeng';
         DialogModule,
         DropdownModule,
         FileUploadModule,
-        CarouselModule 
+        CarouselModule ,
+        NgImageSliderModule,
+        MenuModule
     ]
 })
 export class NgPrimeModule { }

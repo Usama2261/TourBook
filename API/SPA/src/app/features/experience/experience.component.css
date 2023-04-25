@@ -1,0 +1,16 @@
+.edit_button{
+    position: relative;
+    bottom: 135px;
+    opacity: 0.5;
+    right: 5px;
+}
+
+.edit_button:hover, .delete_button:hover{
+    opacity: 1;
+}
+
+.delete_button{
+    position: relative;
+    bottom: 135px;
+    opacity: 0.5;
+}

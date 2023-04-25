@@ -16,7 +16,6 @@ export class ExperienceComponent implements OnInit {
 
   user: User;
   experiencList: any;
-
   constructor(
     private sessionService: SessionService,
     private router: Router,
@@ -25,23 +24,26 @@ export class ExperienceComponent implements OnInit {
   ngOnInit() {
     this.user = this.sessionService.getItem("currentUser");
     this.getAllUserExperience();
+   
   }
 
-  addExperience(){
+  addExperience() {
     this.createExperience.show();
   }
 
-  getAllUserExperience(){
+  getAllUserExperience() {
     this.experienceService.GetAllExperienceByUser(this.user.userId)
       .then((response: any) => {
-        debugger
         this.experiencList = response;
       })
   }
-  
-  onExperienceClick(id: any){
-    debugger
-    this.router.navigate(['/main/experience/',id])
+
+  onExperienceClick(id: any) {
+    this.router.navigate(['/main/experience/', id])
+  }
+
+  onEdit(id: any){
+    this.createExperience.show(id);
   }
 
 }
