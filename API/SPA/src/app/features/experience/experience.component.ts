@@ -4,6 +4,7 @@ import { User } from 'src/app/core/models/user.model';
 import { SessionService } from 'src/app/core/services/session.service';
 import { ExperienceService } from 'src/app/core/services/experience.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-experience',
@@ -24,7 +25,7 @@ export class ExperienceComponent implements OnInit {
   ngOnInit() {
     this.user = this.sessionService.getItem("currentUser");
     this.getAllUserExperience();
-   
+
   }
 
   addExperience() {
@@ -42,8 +43,46 @@ export class ExperienceComponent implements OnInit {
     this.router.navigate(['/main/experience/', id])
   }
 
-  onEdit(id: any){
+  onEdit(id: any) {
     this.createExperience.show(id);
+  }
+
+  onDelete(id: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.experienceService.DeleteExperience(id)
+          .then(response => {
+            if (response) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              );
+              this.getAllUserExperience();
+            }
+            else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Experience Not Deleted',
+              })
+            }
+          })
+
+      }
+    });
+  }
+
+  onCreateUpdateExperience(){
+    this.getAllUserExperience();
   }
 
 }

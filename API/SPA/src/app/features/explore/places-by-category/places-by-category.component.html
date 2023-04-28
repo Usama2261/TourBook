@@ -2,12 +2,12 @@
 <hr>
 <div class="row ">
   <div class="col-md-3 py-4 px-4 align-item-center" *ngFor="let place of placeList">
-    <div class="card"  style="width: 18rem; cursor: pointer;" (click)="goToDetail(place.id)">
+    <div class="card" style="width: 18rem;">
       <img [src]="place.imagePath" class="card-img-top" width="200" height="200">
       <div class="card-body">
         <h5 class="card-title">{{place.name}}</h5>
         <p class="card-text">{{place.fullAddress}}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a class="btn btn-primary" (click)="goToDetail(place.id)">Go to Detail</a>
       </div>
     </div>
   </div>

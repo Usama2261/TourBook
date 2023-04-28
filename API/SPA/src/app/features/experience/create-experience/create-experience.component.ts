@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ExperienceService } from 'src/app/core/services/experience.service';
 import { PlacesService } from 'src/app/core/services/places.service';
 
@@ -8,6 +8,7 @@ import { PlacesService } from 'src/app/core/services/places.service';
   styleUrls: ['./create-experience.component.css']
 })
 export class CreateExperienceComponent implements OnInit {
+  @Output() onCreateUpdate = new EventEmitter<any>();
 
   visible: boolean = false;
   categoryList: any[] = [];
@@ -17,6 +18,7 @@ export class CreateExperienceComponent implements OnInit {
   selectedCategory: any;
   selectedPlace: any;
   expStory: string = '';
+  characterCounter: number = 0
 
   imagesList = [];
   image: any;
@@ -35,13 +37,13 @@ export class CreateExperienceComponent implements OnInit {
       this.selectedCategory = undefined;
       this.selectedPlace = undefined;
       this.expStory = '';
+      this.imagesList = [];
       this.visible = true;
     }
     else{
       this.experienceService.GetExperienceDetail(expId)
         .then(response => {
           if(response){
-            debugger
             this.selectedCategory = this.categoryList.find(x => x.name == response.categoryName).id;
             this.selectedPlace = response.placeName;
             this.expStory = response.experienceStory;
@@ -55,6 +57,10 @@ export class CreateExperienceComponent implements OnInit {
     for (let file of event.files) {
       this.uploadedFiles.push(file);
     }
+  }
+
+  onImageRemove(index: number){
+    this.imagesList.splice(index, 1);
   }
 
   onFileChange(event: any) {
@@ -76,12 +82,9 @@ export class CreateExperienceComponent implements OnInit {
     this.image = undefined
   }
 
-  // getAllPlaces() {
-  //   this.experienceService.GetAllPlaces()
-  //     .then((response: any) => {
-  //       this.placeList = response
-  //     })
-  // }
+  onStoryInput(){
+    this.characterCounter = this.expStory.length;
+  }
 
   getAllCategories() {
     this.placesService.getAllCategories()
@@ -111,7 +114,7 @@ export class CreateExperienceComponent implements OnInit {
   checkValidation(){
     if(this.selectedCategory?.id > 0 && 
       this.selectedPlace?.id > 0 && 
-      this.expStory.length > 0)
+      this.expStory.length > 99)
       {
         return false;
       }
@@ -131,7 +134,8 @@ export class CreateExperienceComponent implements OnInit {
     requestBody["imagesBase64"] = imageBase64List;
     this.experienceService.UploadImages(requestBody)
       .then((response: any) => {
-        this.visible = false
+        this.visible = false;
+        this.onCreateUpdate.emit();
       });
   }
 

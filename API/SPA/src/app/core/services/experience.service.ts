@@ -70,4 +70,16 @@ export class ExperienceService {
         return result;
       });
   }
+
+  DeleteExperience(experienceId: number) {
+    return this.ax
+      .getAxiosWithHeaders()
+      .post(
+        `${this.utils.GetAPIBaseUrl()}/api/Experience/DeleteExperience?experienceId=${experienceId}`
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
 }

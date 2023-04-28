@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DashboardService } from 'src/app/core/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,11 @@ export class DashboardComponent implements OnInit {
 
   msgs: any[];
 
-  constructor(translate: TranslateService) {
+  entityCounts: any;
+
+  constructor(
+    private _dashboardService: DashboardService,
+    translate: TranslateService) {
     this.barChartData = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
@@ -60,6 +65,15 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getEntityCount();
+  }
+
+  getEntityCount(){
+    this._dashboardService.GetEntityCount()
+      .then(response => {
+        debugger
+        this.entityCounts = response;
+      })
   }
 
 }

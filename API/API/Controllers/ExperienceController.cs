@@ -51,5 +51,13 @@ namespace API.Controllers
             var response = await _experienceRepo.GetExperienceDetail(experienceId);
             return Ok(response);
         }
+
+        [HttpPost("DeleteExperience")]
+        public async Task<IActionResult> DeleteExperience(long experienceId)
+        {
+            var response = await _experienceRepo.DeleteExperience(experienceId);
+
+            return Ok(response);
+        }
     }
 }

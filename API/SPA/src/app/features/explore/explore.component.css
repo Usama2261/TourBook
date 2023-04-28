@@ -6,5 +6,9 @@ img {
   .card{
     width: 18rem;
     cursor: pointer;
-    background-color: rgb(97, 237, 72);
+    background-color: rgb(60, 94, 50, 1);
+  }
+
+  .card-title{
+    color: white;
   }

@@ -1,42 +1,48 @@
-<p-dialog header="header" [(visible)]="visible" [style]="{ width: '50vw' }" modal="true">
+<p-dialog header="Add Experience" [(visible)]="visible" [style]="{ width: '50vw' }" 
+     modal="true">
   <ng-template pTemplate="header">
     <span class="text-xl font-bold">Add Experience</span>
   </ng-template>
   <div class="row">
     <div class="form-group my-2">
-      <label for="place"><strong>Select Category</strong></label>
-      <p-dropdown [options]="categoryList" name="category" inputStyleClass="form-control"
-        [(ngModel)]="selectedCategory" showClear="true" styleClass="width-percent-100" optionLabel="name" optionValue="id"
+      <label for="place" class="form-label"><strong>Select Category</strong></label>
+      <p-dropdown [options]="categoryList" name="category" inputStyleClass="form-control" [(ngModel)]="selectedCategory"
+        showClear="true" styleClass="width-percent-100" optionLabel="name" optionValue="id"
         placeholder="Select Category" (onChange)="loadPlaces(selectedCategory.name)">
       </p-dropdown>
     </div>
     <div class="form-group my-2">
-      <label for="place"><strong>Select Place</strong></label>
-      <p-dropdown [options]="placeList" name="places" inputStyleClass="form-control"
-        [(ngModel)]="selectedPlace" showClear="true" styleClass="width-percent-100" optionLabel="name" optionValue="id"
-        placeholder="Select Place">
+      <label for="place" class="form-label"><strong>Select Place</strong></label>
+      <p-dropdown [options]="placeList" name="places" inputStyleClass="form-control" [(ngModel)]="selectedPlace"
+        showClear="true" styleClass="width-percent-100" optionLabel="name" optionValue="id" placeholder="Select Place">
       </p-dropdown>
     </div>
     <div class="form-group my-2">
-      <label for="experience"><strong>Write Your Experience</strong></label>
+      <label for="experience" class="form-label"><strong>Write Your Experience</strong></label>
       <div>
-        <textarea class="w-100 form-control" [(ngModel)]="expStory" name="experience" id="experience" rows="5">
+        <textarea class="w-100 form-control" [(ngModel)]="expStory" name="experience" id="experience" rows="5"
+          placeholder="Write minimum 100 alphabets..." (input)="onStoryInput()">
         </textarea>
+        <span class="float-end">{{characterCounter}}/100</span>
       </div>
     </div>
     <div id="imageUpload" class="my-2">
-      <label for="image"><strong>Upload Images</strong></label>
-      <input name="image" id="file" type="file" accept="image/*"  [(ngModel)]="image"
-        class="form-control" multiple="" (change)="onFileChange($event)">
+      <label for="image" class="form-label"><strong>Upload Images</strong></label>
+      <input name="image" id="file" type="file" accept="image/*" [(ngModel)]="image" class="form-control" multiple=""
+        (change)="onFileChange($event)">
     </div>
     <div class="form-group my-2 d-flex">
-      <div class="mx-4" *ngFor="let image of imagesList">
-        <img [src]="image" alt="image Show" height="100" width="100">
+      <div class="mx-4" *ngFor="let image of imagesList; let i = index">
+        <button id="image_close" (click)="onImageRemove(i)">
+          &times;
+        </button>
+        <img [src]="image" class="image_Selected" alt="No image" height="100" width="100">
       </div>
     </div>
     <br>
     <div class="form-group my-4">
-      <button type="submit" [disabled]="checkValidation()" class="btn btn-success float-end" (click)="onSave()">Save</button>
+      <button type="submit" [disabled]="checkValidation()" class="btn btn-success float-end"
+        (click)="onSave()">Save</button>
     </div>
   </div>
   <ng-template pTemplate="footer">

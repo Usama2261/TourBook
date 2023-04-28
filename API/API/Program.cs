@@ -18,6 +18,7 @@ builder.Services.AddTransient<Seed>();
 builder.Services.AddScoped<AccountRepository>();
 builder.Services.AddScoped<ExploreRepository>();
 builder.Services.AddScoped<ExperienceRepository>();
+builder.Services.AddScoped<DashboardRepository>();
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 ﻿using API.Data.Context;
 using API.Data.Entities;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Repository
@@ -32,11 +33,35 @@ namespace API.Repository
             return places;
         }
 
-        public async Task<Place> GetPlaceById(long Id)
+        public async Task<GetPlaceDetail> GetPlaceById(long Id)
         {
+            var obj = new GetPlaceDetail();
+
+            var allCategories = await _context.PlaceCategories.ToListAsync();
+
             var place = await _context.Places.Where(x => x.Id == Id).FirstOrDefaultAsync();
 
-            return place;
+            
+
+            if(place != null)
+            {
+                var visitors = await _context.Experiences.Where(x => x.PlaceId == place.Id).CountAsync();
+
+                obj = new GetPlaceDetail
+                {
+                    PlaceId = place.Id,
+                    Name = place.Name,
+                    Description = place.Description,
+                    FullAddress = place.FullAddress,
+                    CategoryName = allCategories.Find(x => x.Id == place.CategoryId).Name ?? "",
+                    LocationAddress = place.LocationAddress,
+                    ImagePath = place.ImagePath,
+                    VisitorsCount = visitors
+                };
+            }
+            
+
+            return obj;
         }
     }
 }

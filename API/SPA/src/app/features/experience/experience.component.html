@@ -10,10 +10,10 @@
 <div class="row">
   <h1>My Experiences</h1>
   <div class="card flex mx-4 my-2" *ngFor="let exp of experiencList" style="width: 15rem; cursor:pointer; padding: 0;">
-    <div class="card-img-top">
-      <img class="img-fluid mx-auto d-block" [src]="exp.images[0]?.imageContent"
-        (click)="onExperienceClick(exp.experienceId)">
-      <button class="btn btn-danger btn-sm float-end delete_button">
+    <img class="mx-auto card-img-top" [src]="exp.images[0]?.imageContent"
+      (click)="onExperienceClick(exp.experienceId)">
+    <div>
+      <button class="btn btn-danger btn-sm float-end delete_button" (click)="onDelete(exp.experienceId)">
         <i class="bi bi-trash-fill"></i></button>
       <button class="btn btn-secondary btn-sm float-end edit_button" (click)="onEdit(exp.experienceId)">
         <i class="bi bi-pencil-square"></i></button>
@@ -27,4 +27,4 @@
   </div>
 </div>
 
-<app-create-experience #createExperience></app-create-experience>
+<app-create-experience #createExperience (onCreateUpdate)="onCreateUpdateExperience()"></app-create-experience>

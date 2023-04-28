@@ -130,5 +130,24 @@ namespace API.Repository
 
             return obj;
         }
+
+        public async Task<bool> DeleteExperience(long experienceId)
+        {
+            var exp = await _context.Experiences.Where(x => x.Id == experienceId).FirstOrDefaultAsync();
+
+            if (exp != null)
+            {
+                var expImages = await _context.UserExperienceImages.Where(x => x.ExperienceId == experienceId).ToListAsync();
+                
+                _context.RemoveRange(expImages);
+                _context.Experiences.Remove(exp);
+
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
