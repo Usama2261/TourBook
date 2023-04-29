@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider';
 import { ExperienceService } from 'src/app/core/services/experience.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 import { PlacesService } from 'src/app/core/services/places.service';
 import Swal from 'sweetalert2';
 
@@ -31,7 +32,8 @@ export class CreateExperienceComponent implements OnInit {
 
   constructor(
     private experienceService: ExperienceService,
-    private placesService: PlacesService) { }
+    private placesService: PlacesService,
+    private loaderService: LoaderService) { }
 
   ngOnInit() {
     this.getAllCategories();
@@ -125,6 +127,7 @@ export class CreateExperienceComponent implements OnInit {
   }
 
   onSaveOrUpdate(experienceId: number) {
+    this.loaderService.show();
     let model: any = {};
     if(experienceId > 0){
       model["Id"] = experienceId;
@@ -162,6 +165,7 @@ export class CreateExperienceComponent implements OnInit {
       .then((response: any) => {
         this.visible = false;
         this.onCreateUpdate.emit();
+        this.loaderService.hide();
       });
   }
 

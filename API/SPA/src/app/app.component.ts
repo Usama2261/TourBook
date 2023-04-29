@@ -39,9 +39,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loaderService.status.subscribe((val: boolean) => {
-      this.showLoader = val;
-    });
+    // this.loaderService.status.subscribe((val: boolean) => {
+    //   this.showLoader = val;
+    // });
 
     this.themeService.theme.subscribe((val: string) => {
       this.theme = val;
@@ -50,6 +50,6 @@ export class AppComponent implements OnInit {
 
   ngOnDestroy() {
     this.themeService.theme.observers.forEach(function (element) { element.complete(); });
-    this.loaderService.status.observers.forEach(function (element) { element.complete(); });
+    // this.loaderService.status.observers.forEach(function (element) { element.complete(); });
   }
 }

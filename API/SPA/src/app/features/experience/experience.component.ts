@@ -5,6 +5,7 @@ import { SessionService } from 'src/app/core/services/session.service';
 import { ExperienceService } from 'src/app/core/services/experience.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
+import { LoaderService } from 'src/app/core/services/loader.service';
 
 @Component({
   selector: 'app-experience',
@@ -20,6 +21,7 @@ export class ExperienceComponent implements OnInit {
   constructor(
     private sessionService: SessionService,
     private router: Router,
+    private loaderService: LoaderService,
     private experienceService: ExperienceService) { }
 
   ngOnInit() {
@@ -33,9 +35,11 @@ export class ExperienceComponent implements OnInit {
   }
 
   getAllUserExperience() {
+    this.loaderService.show();
     this.experienceService.GetAllExperienceByUser(this.user.userId)
       .then((response: any) => {
         this.experiencList = response;
+        this.loaderService.hide();
       })
   }
 

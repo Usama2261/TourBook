@@ -9,13 +9,13 @@ import { BehaviorSubject } from 'rxjs';
  * toggle loader gif in website
  */
 export class LoaderService {
-    public status: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     show() {
-        this.status.next(true);
+        this.loading.next(true);
     }
 
     hide() {
-        this.status.next(false);
+        this.loading.next(false);
     }
 }
