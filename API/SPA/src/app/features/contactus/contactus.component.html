@@ -1,5 +1,32 @@
-<p-panel header="Contact us">
-  <p>
-    Please send mail on <a (click)="openDialogForMail()">nilavpatel1992@gmail.com</a>
-  </p>
-</p-panel>
+
+<div class="row justify-content-between">
+  <div class="col-md-6 card bg-light mx-4">
+    <div class="card-title">
+      <h1>Contact Us</h1>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="form-group my-1">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" name="fullName"
+            [(ngModel)]="contactUsModel.fullName" id="fullName" disabled>
+        </div>
+        <div class="form-group my-1">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email"
+              [(ngModel)]="contactUsModel.email" id="email" disabled>
+        </div>
+        <div class="form-group my-1">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" [(ngModel)]="contactUsModel.message" name="message" id="" cols="30" rows="5"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary" (click)="onSaveContactUs()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+

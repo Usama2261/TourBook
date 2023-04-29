@@ -1,4 +1,5 @@
 ﻿using API.Data.Context;
+using API.Data.Entities;
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,19 @@ namespace API.Repository
             obj.StoriesCount = await _context.Experiences.CountAsync();
 
             return obj;
+        }
+
+        public async Task CreateContactUsForm(long userId, string message)
+        {
+            var obj = new ContactUs
+            {
+                UserId  =  userId,
+                Message = message
+            };
+
+            _context.Add(obj);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

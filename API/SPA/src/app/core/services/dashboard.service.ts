@@ -20,4 +20,16 @@ export class DashboardService {
         return result;
       });
   }
+
+  SaveContactUsForm(userId: number, message: string){
+    return this.ax
+      .getAxiosWithHeaders()
+      .post(
+        `${this.utils.GetAPIBaseUrl()}/api/Dashboard/CreateContactUsForm?userId=${userId}&message=${message}`
+      )
+      .then((response: any) => {
+        let result = response.data;
+        return result;
+      });
+  }
 }

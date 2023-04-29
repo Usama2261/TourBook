@@ -13,5 +13,6 @@ namespace API.Data.Context
         public DbSet<Place> Places { get; set; }
         public DbSet<Experience> Experiences { get; set; }
         public DbSet<UserExperienceImage> UserExperienceImages { get; set; }
+        public DbSet<ContactUs> ContactUs { get; set; }
     }
 }

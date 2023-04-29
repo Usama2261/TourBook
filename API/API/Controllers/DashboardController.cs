@@ -18,5 +18,13 @@ namespace API.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("CreateContactUsForm")]
+        public async Task<IActionResult> CreateContactUsForm(long userId, string message)
+        {
+            await _dashboardRepository.CreateContactUsForm(userId, message);
+
+            return Ok();
+        }
     }
 }
