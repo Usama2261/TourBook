@@ -14,23 +14,40 @@ namespace API.Repository
             _context = context;
         }
 
-        public async Task<long> CreateUserExperience(Experience exp)
+        public async Task<long> CreateOrUpdateUserExperience(Experience exp)
         {
-            var obj = new Experience
-            {
-                CategoryId = exp.CategoryId,
-                PlaceId = exp.PlaceId,
-                ExperienceStory = exp.ExperienceStory
-            };
+            var experience = await _context.Experiences.Where(x => x.Id == exp.Id).FirstOrDefaultAsync();
 
-            _context.Experiences.Add(obj);
+            if (experience == null)
+            {
+                var obj = new Experience
+                {
+                    CategoryId = exp.CategoryId,
+                    PlaceId = exp.PlaceId,
+                    ExperienceStory = exp.ExperienceStory
+                };
+
+                _context.Experiences.Add(obj);
+                exp.Id = obj.Id;
+            }
+            else
+            {
+                experience.CategoryId = exp.CategoryId;
+                experience.PlaceId = exp.PlaceId;
+                experience.ExperienceStory = exp.ExperienceStory;
+            }
+            
             await _context.SaveChangesAsync();
 
-            return obj.Id;
+            return exp.Id;
         }
 
         public async Task CreateUserExperienceImages(ImageUploadRequest images)
         {
+            var experienceImages = await _context.UserExperienceImages.Where(x => x.ExperienceId == images.ExperienceId).ToListAsync();
+
+            _context.UserExperienceImages.RemoveRange(experienceImages);
+
             foreach (var imageBase64 in images.ImagesBase64)
             {
                 var obj = new UserExperienceImage

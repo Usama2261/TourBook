@@ -31,18 +31,30 @@
       <input name="image" id="file" type="file" accept="image/*" [(ngModel)]="image" class="form-control" multiple=""
         (change)="onFileChange($event)">
     </div>
-    <div class="form-group my-2 d-flex">
+    <!-- <div class="form-group my-2 d-flex">
       <div class="mx-4" *ngFor="let image of imagesList; let i = index">
         <button id="image_close" (click)="onImageRemove(i)">
           &times;
         </button>
         <img [src]="image" class="image_Selected" alt="No image" height="100" width="100">
       </div>
+    </div> -->
+    <br><br>
+    <div class="row mx-2 slider">
+      <ng-image-slider #nav 
+          [images]="imagesList" 
+          [imagePopup]="false"
+          [imageSize]="{width: 100, height: 100}"
+          slideImage="1"
+          [infinite]="false"
+          (imageClick)="onImageClick($event)"
+          >
+        </ng-image-slider>
     </div>
     <br>
     <div class="form-group my-4">
       <button type="submit" [disabled]="checkValidation()" class="btn btn-success float-end"
-        (click)="onSave()">Save</button>
+        (click)="onSaveOrUpdate(experienceId)">{{ isUpdated ? 'Update' : 'Save'}}</button>
     </div>
   </div>
   <ng-template pTemplate="footer">

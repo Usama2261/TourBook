@@ -26,25 +26,6 @@ export class ExperienceDetailComponent implements OnInit {
   ngOnInit() {
     this.experienceId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
     this.getExperienceDetail();
-
-    this.responsiveOptions = [
-      {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
-      },
-      {
-        breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1
-      },
-      {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
-
   }
 
   getExperienceDetail() {

@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { NgImageSliderComponent } from 'ng-image-slider';
 import { ExperienceService } from 'src/app/core/services/experience.service';
 import { PlacesService } from 'src/app/core/services/places.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-experience',
@@ -8,6 +10,7 @@ import { PlacesService } from 'src/app/core/services/places.service';
   styleUrls: ['./create-experience.component.css']
 })
 export class CreateExperienceComponent implements OnInit {
+  @ViewChild('nav') slider: NgImageSliderComponent;
   @Output() onCreateUpdate = new EventEmitter<any>();
 
   visible: boolean = false;
@@ -18,10 +21,13 @@ export class CreateExperienceComponent implements OnInit {
   selectedCategory: any;
   selectedPlace: any;
   expStory: string = '';
+  experienceId: number;
   characterCounter: number = 0
 
-  imagesList = [];
+  imagesList = Array<any>();
   image: any;
+
+  isUpdated: boolean = false;
 
   constructor(
     private experienceService: ExperienceService,
@@ -29,7 +35,6 @@ export class CreateExperienceComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCategories();
-    //this.getAllPlaces();
   }
 
   show(expId?: any) {
@@ -38,15 +43,30 @@ export class CreateExperienceComponent implements OnInit {
       this.selectedPlace = undefined;
       this.expStory = '';
       this.imagesList = [];
+      this.isUpdated = false;
       this.visible = true;
     }
     else{
+      this.experienceId = expId;
       this.experienceService.GetExperienceDetail(expId)
         .then(response => {
           if(response){
-            this.selectedCategory = this.categoryList.find(x => x.name == response.categoryName).id;
-            this.selectedPlace = response.placeName;
+            this.isUpdated = true;
+            this.selectedCategory = this.categoryList.find(x => x.name == response.categoryName);
+            if(this.selectedCategory?.name){
+              this.loadPlaces(this.selectedCategory.name, response.placeName)
+            }
             this.expStory = response.experienceStory;
+            this.imagesList = [];
+            response.images.forEach(img => {
+              let obj: any = {
+                image: img.imageContent,
+                thumbImage: img.imageContent,
+                alt: 'alt of image',
+              }
+              // this.imagesList.push(img.imageContent);
+              this.imagesList.push(obj);
+            });;
             this.visible = true;
           }
         })
@@ -69,11 +89,12 @@ export class CreateExperienceComponent implements OnInit {
       for (let i = 0; i < filesAmount; i++) {
         var reader = new FileReader();
         reader.onload = (event: any) => {
-          this.imagesList.push(event.target.result);
-          console.log(event.target.result)
-          //  this.myForm.patchValue({
-          //     fileSource: this.images
-          //  });
+          let obj: any = {
+            image: event.target.result,
+            thumbImage: event.target.result,
+            alt: 'alt of image',
+          }
+          this.imagesList.push(obj);
         }
 
         reader.readAsDataURL(event.target.files[i]);
@@ -93,19 +114,25 @@ export class CreateExperienceComponent implements OnInit {
       })
   }
 
-  loadPlaces(categoryName){
+  loadPlaces(categoryName, selectedPlace?: string){
     this.placesService.getCategoryByName(categoryName)
       .then((response: any) => {
         this.placeList = response;
+        if(selectedPlace){
+          this.selectedPlace = this.placeList.find(x => x.name == selectedPlace);
+        }
       })
   }
 
-  onSave() {
+  onSaveOrUpdate(experienceId: number) {
     let model: any = {};
+    if(experienceId > 0){
+      model["Id"] = experienceId;
+    }
     model["CategoryId"] = this.selectedCategory?.id;
     model["PlaceId"] = this.selectedPlace?.id;
     model["ExperienceStory"] = this.expStory;
-    this.experienceService.CreateExperience(model)
+    this.experienceService.CreateOrUpdateExperience(model)
       .then((response) => {
         this.saveImages(response);
       });
@@ -124,9 +151,8 @@ export class CreateExperienceComponent implements OnInit {
 
   saveImages(experienceId: number) {
     let imageBase64List = [];
-    let fileReader = new FileReader();
     for (let i = 0; i < this.imagesList.length; i++) {
-      let imageBase64 = this.imagesList[i].split(',')[1];
+      let imageBase64 = this.imagesList[i].image.split(',')[1];
       imageBase64List.push(imageBase64);
     }
     let requestBody: any = {};
@@ -137,6 +163,22 @@ export class CreateExperienceComponent implements OnInit {
         this.visible = false;
         this.onCreateUpdate.emit();
       });
+  }
+
+  onImageClick(index: any){
+    Swal.fire({
+      title: '',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Open Image',
+      denyButtonText: `Delete Image`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.slider.imagePopup = true;
+      } else if (result.isDenied) {
+        this.imagesList.splice(index, 1)
+      }
+    })
   }
 
 }

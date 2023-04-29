@@ -14,10 +14,10 @@ namespace API.Controllers
             _experienceRepo = experienceRepo;
         }
 
-        [HttpPost("CreateUserExperience")]
-        public async Task<IActionResult> CreateUserExperience([FromBody] Experience exp)
+        [HttpPost("CreateOrUpdateUserExperience")]
+        public async Task<IActionResult> CreateOrUpdateUserExperience([FromBody] Experience exp)
         {
-            var response = await _experienceRepo.CreateUserExperience(exp);
+            var response = await _experienceRepo.CreateOrUpdateUserExperience(exp);
 
             return Ok(response);
         }

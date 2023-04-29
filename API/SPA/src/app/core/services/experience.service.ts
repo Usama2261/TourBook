@@ -9,11 +9,11 @@ export class ExperienceService {
 
   constructor(private ax: AxioHelper, private utils: AppUtils) { }
 
-  CreateExperience(model: any) {
+  CreateOrUpdateExperience(model: any) {
     return this.ax
       .getAxiosWithHeaders()
       .post(
-        `${this.utils.GetAPIBaseUrl()}/api/Experience/CreateUserExperience`,
+        `${this.utils.GetAPIBaseUrl()}/api/Experience/CreateOrUpdateUserExperience`,
         model
       )
       .then((response: any) => {
