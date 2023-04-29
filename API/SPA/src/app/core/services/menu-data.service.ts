@@ -18,7 +18,7 @@ export class MenuDataService {
                 Label: 'Home', Icon: 'fa-home', RouterLink: '/main/dashboard', Childs: null, IsChildVisible: false
             },
             {
-                Label: 'Explore', Icon: 'fa-users', RouterLink: '/main/explore', Childs: null, IsChildVisible: false
+                Label: 'Explore', Icon: 'fa-search', RouterLink: '/main/explore', Childs: null, IsChildVisible: false
             },
             {
                 Label: 'Experiences', Icon: 'fa-sitemap', RouterLink: '/main/experience', Childs: null, IsChildVisible: false

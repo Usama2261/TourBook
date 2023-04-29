@@ -51,6 +51,7 @@ export class MenuComponent implements OnInit {
 
     // on menu click event
     onMenuClick(menu: CustomMenuItem) {
+        debugger
         // if child are available then open child
         if (menu.Childs != undefined || menu.Childs != null) {
             this.toggleSubMenu(menu);

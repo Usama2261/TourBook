@@ -2,7 +2,7 @@
     <ul class="np-menu">
         <ng-template #recursiveList let-list>
             <li *ngFor="let menu of list">
-                <a (click)="onMenuClick(menu)" [ngClass]="{'active': selectedItem == menu.Label}">
+                <a (click)="onMenuClick(menu)" [ngClass]="{'active-link': selectedItem == menu.Label}">
                     <i class="fa fa-fw" [ngClass]="menu.Icon"></i>
                     {{menu.Label | translate}}
                     <i class="fa right" *ngIf="menu.Childs != null"

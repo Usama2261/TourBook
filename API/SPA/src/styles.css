@@ -17,7 +17,7 @@
     --header-footer-bg-color: #6f6f88;
     --header-footer-bg-color2: #3b3b48;
     --menubar-background: #525262;
-    --menubar-color: #f5f5f5;
+    /* --menubar-color: #f5f5f5; */
     --active-menu-color: #919191;
 }
 
@@ -27,7 +27,7 @@
     --header-footer-bg-color: #6cc7cf;
     --header-footer-bg-color2: #03767e;
     --menubar-background: #2ab1be;
-    --menubar-color: #f5f5f5;
+    /* --menubar-color: #f5f5f5; */
     --active-menu-color: #ffffff;
 }
 
@@ -37,7 +37,7 @@
     --header-footer-bg-color: #73dfae;
     --header-footer-bg-color2: #1e8455;
     --menubar-background: #32b67a;
-    --menubar-color: #135436;
+    /* --menubar-color: #135436; */
     --active-menu-color: #b3eed3;
 }
 
@@ -47,7 +47,7 @@
     --header-footer-bg-color: #2d5394;
     --header-footer-bg-color2: #2d5394;
     --menubar-background: #839de2;
-    --menubar-color: #f5f5f5;
+    /* --menubar-color: #f5f5f5; */
     --active-menu-color: #ffffff;
 }
 
@@ -57,7 +57,7 @@
     --header-footer-bg-color: #79425a;
     --header-footer-bg-color2: #79425a;
     --menubar-background: #935b74;
-    --menubar-color: #f5f5f5;
+    /* --menubar-color: #f5f5f5; */
     --active-menu-color: #ffffff;
 }
 
@@ -67,7 +67,7 @@
     --header-footer-bg-color: #427976;
     --header-footer-bg-color2: #427976;
     --menubar-background: #599592;
-    --menubar-color: #f5f5f5;
+    /* --menubar-color: #f5f5f5; */
     --active-menu-color: #003331;
 }
 
@@ -293,6 +293,11 @@ html, body {
 
 .np-menu li a:hover, .np-menu .active {
     color: var(--active-menu-color);
+    cursor: pointer;
+}
+
+.np-menu li a:hover, .np-menu .active-link {
+    color: white;
     cursor: pointer;
 }
 
