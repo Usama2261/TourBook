@@ -36,7 +36,7 @@ export class ExperienceComponent implements OnInit {
 
   getAllUserExperience() {
     this.loaderService.show();
-    this.experienceService.GetAllExperienceByUser(this.user.userId)
+    this.experienceService.GetAllExperienceByUser(this.user.id)
       .then((response: any) => {
         this.experiencList = response;
         this.loaderService.hide();

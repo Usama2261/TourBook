@@ -13,7 +13,7 @@ export class UserDataService {
 
     constructor() {
         let user = {
-            userId: 1, userName: "admin", password: "password", emailId: "admin@admin.com", birthDate: new Date('10/28/1992')
+            id: 1, userName: "admin", password: "password", emailId: "admin@admin.com", birthDate: new Date('10/28/1992')
         };
         this.users.push(user);
     }
@@ -43,7 +43,7 @@ export class UserDataService {
     addUser(userName: string, password: string, emailId: string, birthDate: Date): boolean {
         let userId = this.users.length + 1;
         let user = new User();
-        user.userId = userId;
+        user.id = userId;
         user.userName = userName;
         user.password = password;
         user.emailId = emailId;

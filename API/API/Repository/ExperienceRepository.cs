@@ -22,6 +22,7 @@ namespace API.Repository
             {
                 var obj = new Experience
                 {
+                    UserId = exp.UserId,
                     CategoryId = exp.CategoryId,
                     PlaceId = exp.PlaceId,
                     ExperienceStory = exp.ExperienceStory

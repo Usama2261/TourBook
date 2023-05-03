@@ -1,9 +1,11 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgImageSliderComponent } from 'ng-image-slider';
+import { User } from 'src/app/core/models/user.model';
 import { ExperienceService } from 'src/app/core/services/experience.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { PlacesService } from 'src/app/core/services/places.service';
 import Swal from 'sweetalert2';
+import { SessionService } from 'src/app/core/services/session.service';
 
 @Component({
   selector: 'app-create-experience',
@@ -14,6 +16,7 @@ export class CreateExperienceComponent implements OnInit {
   @ViewChild('nav') slider: NgImageSliderComponent;
   @Output() onCreateUpdate = new EventEmitter<any>();
 
+  user: User;
   visible: boolean = false;
   categoryList: any[] = [];
   placeList: any[] = [];
@@ -33,9 +36,11 @@ export class CreateExperienceComponent implements OnInit {
   constructor(
     private experienceService: ExperienceService,
     private placesService: PlacesService,
+    private sessionService: SessionService,
     private loaderService: LoaderService) { }
 
   ngOnInit() {
+    this.user = this.sessionService.getItem("currentUser");
     this.getAllCategories();
   }
 
@@ -44,11 +49,12 @@ export class CreateExperienceComponent implements OnInit {
       this.selectedCategory = undefined;
       this.selectedPlace = undefined;
       this.expStory = '';
-      this.imagesList = [];
+      this.imagesList = Array<any>();
       this.isUpdated = false;
       this.visible = true;
     }
     else{
+      this.loaderService.show();
       this.experienceId = expId;
       this.experienceService.GetExperienceDetail(expId)
         .then(response => {
@@ -70,6 +76,7 @@ export class CreateExperienceComponent implements OnInit {
               this.imagesList.push(obj);
             });;
             this.visible = true;
+            this.loaderService.hide();
           }
         })
     }
@@ -135,6 +142,7 @@ export class CreateExperienceComponent implements OnInit {
     model["CategoryId"] = this.selectedCategory?.id;
     model["PlaceId"] = this.selectedPlace?.id;
     model["ExperienceStory"] = this.expStory;
+    model["UserId"] = this.user.id;
     this.experienceService.CreateOrUpdateExperience(model)
       .then((response) => {
         this.saveImages(response);

@@ -5,8 +5,8 @@
         </div>
         <div class="logo right">
             <!-- <img src="assets/images/logo-large.png" class="logo-large"> -->
-            <img src="assets/images/explore.jpg" class="logo-large">
-            <img src="assets/images/logo-small.png" class="logo-small">
+            <img src="assets/logo2.png" class="logo-large">
+            <img src="assets/logo2.png" class="logo-small">
         </div>
     </div>
     <div class="ng-header-right right">
@@ -20,16 +20,22 @@
             <a class="icon"><i class="fa fa-bell"></i><span class="badge">5</span></a>
         </div> -->
         <div class="ng-header-right-item right" (click)="userdetails.toggle($event)">
-            <a class="icon"><span [innerHtml]="user.userName" class="user-name"></span><i class="fa fa-user"></i></a>
+            <a class="icon"><span [innerHtml]="user.userName | titlecase" class="user-name"></span>
+                <span *ngIf="!user.profileImage">
+                    <i class="bi bi-person"></i>
+                </span>
+                
+            </a>
         </div>
     </div>
 </div>
 
 <!-- user detials overlay panel -->
 <p-overlayPanel #userdetails>
-    <div><b>User Name: </b><i [innerHtml]="user.userName"></i></div>
+    <div><b>User Name: </b><i [innerHtml]="user.userName | titlecase"></i></div>
     <div><b>Email Id: </b><i [innerHtml]="user.email"></i></div>
     <div><b>Birthdate: </b><i [innerHtml]="user.dob | date:'dd/MM/yyyy'"></i></div>
+    <div><button class="btn btn-secondary">Add Profile Image</button></div>
 </p-overlayPanel>
 
 <!-- notifications sidebar -->

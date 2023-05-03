@@ -6,7 +6,6 @@
       <p class="product-description">{{experience?.experienceStory}}</p>
       <hr>
       <h6 class="price">Category: <span>{{experience?.categoryName}}</span></h6>
-      <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
     </div>
 
     <div class="col-md-6" *ngIf="isIframe">
@@ -17,7 +16,7 @@
   <hr>
   <h4>Images</h4>
   <br>
-  <div class="row mx-2 slider">
+  <div class="row mx-2 slider" *ngIf="imagesArray.length > 0">
     <ng-image-slider #nav [images]="imagesArray"></ng-image-slider>
   </div>
 </div>

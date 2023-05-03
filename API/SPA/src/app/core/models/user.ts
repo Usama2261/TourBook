@@ -8,4 +8,5 @@ export class User{
     dob: string = "";
     email: string = "";
     gender: string = "Male";
+    profileImage: string = "";
 }

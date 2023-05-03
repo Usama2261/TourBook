@@ -31,16 +31,8 @@
       <input name="image" id="file" type="file" accept="image/*" [(ngModel)]="image" class="form-control" multiple=""
         (change)="onFileChange($event)">
     </div>
-    <!-- <div class="form-group my-2 d-flex">
-      <div class="mx-4" *ngFor="let image of imagesList; let i = index">
-        <button id="image_close" (click)="onImageRemove(i)">
-          &times;
-        </button>
-        <img [src]="image" class="image_Selected" alt="No image" height="100" width="100">
-      </div>
-    </div> -->
     <br><br>
-    <div class="row mx-2 slider">
+    <div class="row mx-2 slider" *ngIf="imagesList.length > 0">
       <ng-image-slider #nav 
           [images]="imagesList" 
           [imagePopup]="false"

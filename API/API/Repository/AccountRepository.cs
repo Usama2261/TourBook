@@ -1,6 +1,7 @@
 ﻿using API.Data.Context;
 using API.Data.Entities;
 using API.Models;
+using static API.Common.ConstantEnums;
 
 namespace API.Repository
 {
@@ -22,7 +23,8 @@ namespace API.Repository
                 DOB = user.DOB,
                 Gender = user.Gender,
                 UserName = user.UserName,
-                Password = user.Password
+                Password = user.Password,
+                ProfileImage = ""
             };
 
             _context.Users.Add(obj);
@@ -47,7 +49,8 @@ namespace API.Repository
                         Gender = user.Gender,
                         Id = user.Id,
                         LastName = user.LastName,
-                        UserName = user.UserName
+                        UserName = user.UserName,
+                        ProfileImage = user.ProfileImage
                     };
                     return returnUser;
                 }
