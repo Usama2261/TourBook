@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutusComponent implements OnInit {
 
+  members = [
+    { name: "Sadia Naz", rollNo: "F16-0788"},
+    { name: "Laiba Mehboob", rollNo: "F19-0859"},
+    { name: "Mehboob Khab", rollNo: "F19-0859"},
+  ]
+
   constructor() { }
 
   ngOnInit() {

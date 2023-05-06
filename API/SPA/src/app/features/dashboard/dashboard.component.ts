@@ -9,11 +9,9 @@ import { DashboardService } from 'src/app/core/services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
-  msgs: any[] = [
-    "Welcome to Explore KP"
-  ];
+  msgs = [];
   
-  entityCounts: any;
+  entityCounts: any; 
 
   constructor(
     private _dashboardService: DashboardService) {
@@ -21,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getEntityCount();
+    this.msgs.push({ severity: 'success', summary: '', detail: "Welcome to Explore KP" });
   }
 
   getEntityCount(){
